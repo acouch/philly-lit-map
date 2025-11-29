@@ -9,7 +9,7 @@ export default function NotFound() {
           Book Not Found
         </h2>
         <p className="text-gray-600 mb-8">
-          The book you're looking for doesn't exist.
+          The book you`&apos;`re looking for doesn`&apos;`t exist.
         </p>
         <Link
           href="/books"
