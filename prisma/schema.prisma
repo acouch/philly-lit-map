@@ -17,6 +17,7 @@ model users {
   email     String   @unique
   image     String
   createdAt DateTime @default(now())
+  quotes    quotes[]
 }
 
 model books {
@@ -25,4 +26,15 @@ model books {
   author       String
   image_url    String
   publish_date DateTime
+  quotes        quotes[]
+}
+
+model quotes {
+  id      Int     @id @default(autoincrement())
+  title   String?
+  quote   String  @db.Text
+  books   books @relation(fields: [book_id], references: [id])
+  book_id Int
+  user_id Int
+  user    users   @relation(fields: [user_id], references: [id])
 }
