@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMapEvents,
-} from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { useEffect, useState } from 'react'
@@ -216,7 +210,7 @@ export default function HomeMapWithSidebar({
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
           />
           <MapBoundsUpdater onBoundsChange={setMapBounds} />
           {quotesWithLocation.map((quote) => (
@@ -227,27 +221,7 @@ export default function HomeMapWithSidebar({
               eventHandlers={{
                 click: () => setSelectedQuote(quote),
               }}
-            >
-              <Popup>
-                <div className="max-w-xs">
-                  {quote.title && (
-                    <h3 className="font-semibold mb-1">{quote.title}</h3>
-                  )}
-                  <p className="text-sm italic mb-2">
-                    &quot;{quote.quote}&quot;
-                  </p>
-                  <p className="text-xs text-gray-600 mb-1">
-                    Page {quote.page_number}
-                  </p>
-                  <Link
-                    href={`/books/${quote.books.id}`}
-                    className="text-xs text-blue-600 hover:underline block"
-                  >
-                    From: {quote.books.title} by {quote.books.author}
-                  </Link>
-                </div>
-              </Popup>
-            </Marker>
+            />
           ))}
         </MapContainer>
       </div>
