@@ -10,6 +10,13 @@ export default async function BookPage({ params }: { params: { id: string } }) {
     where: {
       id: parseInt(params.id),
     },
+    include: {
+      quotes: {
+        orderBy: {
+          page_number: 'asc',
+        },
+      },
+    },
   })
 
   if (!book) {
@@ -68,6 +75,34 @@ export default async function BookPage({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+
+        {book.quotes && book.quotes.length > 0 && (
+          <div className="border-t border-gray-300 pt-8 mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              Quotes from this book
+            </h2>
+            <ul className="space-y-4">
+              {book.quotes.map((quote) => (
+                <li key={quote.id}>
+                  <Link
+                    href={`/quote/${quote.id}`}
+                    className="block p-4 bg-white/70 rounded-lg ring-1 ring-gray-900/5 hover:bg-white transition-colors"
+                  >
+                    {quote.title && (
+                      <h3 className="font-semibold mb-2">{quote.title}</h3>
+                    )}
+                    <blockquote className="text-gray-700 italic text-sm mb-2">
+                      {`"${quote.quote}"`}
+                    </blockquote>
+                    <p className="text-xs text-gray-500">
+                      Page {quote.page_number}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </main>
   )
