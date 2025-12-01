@@ -18,6 +18,11 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.leaflet-tile-pane {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
 @layer base {
   article {
     a {
