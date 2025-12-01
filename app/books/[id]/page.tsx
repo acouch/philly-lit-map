@@ -2,6 +2,7 @@ import prisma from '@/lib/prisma'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import QuotesMap from '@/components/quotes-map'
 
 export const dynamic = 'force-dynamic'
 
@@ -75,6 +76,8 @@ export default async function BookPage({ params }: { params: { id: string } }) {
             </div>
           </div>
         </div>
+
+        <QuotesMap quotes={book.quotes || []} />
 
         <div className="border-t border-gray-300 pt-8 mt-8">
           <div className="flex justify-between items-center mb-4">

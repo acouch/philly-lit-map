@@ -1,16 +1,21 @@
 import prisma from '@/lib/prisma'
-import BooksList from '@/components/books-list'
+import AllQuotesMap from '@/components/all-quotes-map'
 
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const startTime = Date.now()
-  const books = await prisma.books.findMany({
+  const quotes = await prisma.quotes.findMany({
+    include: {
+      books: true,
+    },
     orderBy: {
-      publish_date: 'desc',
+      id: 'desc',
     },
   })
-  const duration = Date.now() - startTime
 
-  return <BooksList books={books} duration={duration} />
+  return (
+    <main className="w-full min-h-screen">
+      <AllQuotesMap quotes={quotes} />
+    </main>
+  )
 }
