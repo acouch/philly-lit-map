@@ -4,9 +4,8 @@ import Header from '@/components/header'
 
 export const metadata = {
   metadataBase: new URL('https://postgres-prisma.vercel.app'),
-  title: 'Vercel Postgres Demo with Prisma',
-  description:
-    'A simple Next.js app with Vercel Postgres as the database and Prisma as the ORM',
+  title: 'Philly Lit Map',
+  description: 'A literay map of philadelphia',
 }
 
 const inter = Inter({
