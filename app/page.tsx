@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import AllQuotesMap from '@/components/all-quotes-map'
+import HomeMapWithSidebar from '@/components/home-map-with-sidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,8 +14,8 @@ export default async function Home() {
   })
 
   return (
-    <main className="w-full min-h-screen">
-      <AllQuotesMap quotes={quotes} />
+    <main className="w-full h-screen">
+      <HomeMapWithSidebar quotes={quotes} />
     </main>
   )
 }
