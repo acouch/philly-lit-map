@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import QuotesMap from '@/components/quotes-map'
+import DeleteBookButton from '@/components/delete-book-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -75,6 +76,16 @@ export default async function BookPage({ params }: { params: { id: string } }) {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="border-t border-gray-300 pt-6 mt-6 flex space-x-4">
+          <Link
+            href={`/books/${book.id}/edit`}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
+          >
+            Edit Book
+          </Link>
+          <DeleteBookButton bookId={book.id} />
         </div>
 
         <QuotesMap quotes={book.quotes || []} />
