@@ -3,7 +3,7 @@ const nextConfig = {
   images: {
     domains: [
       'images.ctfassets.net',
-      'www.aaroncouch.name',
+      'philly-lit-map.vercel.app',
       'm.media-amazon.com',
     ],
   },
