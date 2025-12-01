@@ -76,11 +76,19 @@ export default async function BookPage({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        {book.quotes && book.quotes.length > 0 && (
-          <div className="border-t border-gray-300 pt-8 mt-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+        <div className="border-t border-gray-300 pt-8 mt-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold text-gray-900">
               Quotes from this book
             </h2>
+            <Link
+              href={`/quotes/add?book_id=${book.id}`}
+              className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors font-medium text-sm"
+            >
+              Add Quote
+            </Link>
+          </div>
+          {book.quotes && book.quotes.length > 0 && (
             <ul className="space-y-4">
               {book.quotes.map((quote) => (
                 <li key={quote.id}>
@@ -101,8 +109,13 @@ export default async function BookPage({ params }: { params: { id: string } }) {
                 </li>
               ))}
             </ul>
-          </div>
-        )}
+          )}
+          {(!book.quotes || book.quotes.length === 0) && (
+            <p className="text-center text-gray-500 py-8">
+              No quotes yet. Be the first to add one!
+            </p>
+          )}
+        </div>
       </div>
     </main>
   )

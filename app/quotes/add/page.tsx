@@ -2,12 +2,18 @@ import { addQuote } from './actions'
 import Link from 'next/link'
 import prisma from '@/lib/prisma'
 
-export default async function AddQuotePage() {
+export default async function AddQuotePage({
+  searchParams,
+}: {
+  searchParams: { book_id?: string }
+}) {
   const books = await prisma.books.findMany({
     orderBy: {
       title: 'asc',
     },
   })
+
+  const preselectedBookId = searchParams.book_id
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center p-8">
@@ -20,6 +26,9 @@ export default async function AddQuotePage() {
         </div>
 
         <form action={addQuote} className="space-y-6">
+          {preselectedBookId && (
+            <input type="hidden" name="redirect_to_book" value="true" />
+          )}
           <div>
             <label
               htmlFor="book_id"
@@ -31,6 +40,7 @@ export default async function AddQuotePage() {
               id="book_id"
               name="book_id"
               required
+              defaultValue={preselectedBookId || ''}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select a book</option>
@@ -93,6 +103,42 @@ export default async function AddQuotePage() {
             />
           </div>
 
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                htmlFor="latitude"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Latitude (Optional)
+              </label>
+              <input
+                type="number"
+                id="latitude"
+                name="latitude"
+                step="any"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                placeholder="e.g., 39.9526"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="longitude"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Longitude (Optional)
+              </label>
+              <input
+                type="number"
+                id="longitude"
+                name="longitude"
+                step="any"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                placeholder="e.g., -75.1652"
+              />
+            </div>
+          </div>
+
           <div className="flex space-x-4 pt-4">
             <button
               type="submit"
@@ -101,7 +147,9 @@ export default async function AddQuotePage() {
               Add Quote
             </button>
             <Link
-              href="/quotes"
+              href={
+                preselectedBookId ? `/books/${preselectedBookId}` : '/quotes'
+              }
               className="flex-1 bg-white text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors font-medium text-center border border-gray-300"
             >
               Cancel
