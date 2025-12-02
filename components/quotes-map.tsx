@@ -21,7 +21,7 @@ type Quote = {
   id: number
   title: string | null
   quote: string
-  page_number: number
+  page_number: number | null
   latitude: number | null
   longitude: number | null
 }

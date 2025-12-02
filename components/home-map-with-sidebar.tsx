@@ -22,7 +22,7 @@ type Quote = {
   id: number
   title: string | null
   quote: string
-  page_number: number
+  page_number: number | null
   latitude: number | null
   longitude: number | null
   books: Book
@@ -261,7 +261,9 @@ export default function HomeMapWithSidebar({
             {quotesWithLocation.map((quote) => {
               const image_url = quote.books.image_url
               const icon = L.icon({
-                iconUrl: image_url ?? 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                iconUrl:
+                  image_url ??
+                  'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
                 iconRetinaUrl:
                   'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
                 shadowUrl:

@@ -15,7 +15,7 @@ export default async function BookPage({ params }: { params: { id: string } }) {
     include: {
       quotes: {
         orderBy: {
-          page_number: 'asc',
+          createdAt: 'asc',
         },
       },
     },
@@ -109,9 +109,6 @@ export default async function BookPage({ params }: { params: { id: string } }) {
                     <blockquote className="text-gray-700 italic text-sm mb-2">
                       {`"${quote.quote}"`}
                     </blockquote>
-                    <p className="text-xs text-gray-500">
-                      Page {quote.page_number}
-                    </p>
                   </Link>
                 </li>
               ))}

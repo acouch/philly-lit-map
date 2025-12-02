@@ -16,6 +16,7 @@ export async function addBook(formData: FormData) {
       author,
       image_url,
       publish_date: new Date(publish_date),
+      user_id: 1,
     },
   })
 

@@ -12,7 +12,7 @@ type QuoteFormProps = {
     id: number
     title: string | null
     quote: string
-    page_number: number
+    page_number: number | null
     book_id: number
     latitude: number | null
     longitude: number | null
@@ -115,7 +115,9 @@ export default function QuoteForm({
               name="page_number"
               required
               min="1"
-              defaultValue={quote?.page_number}
+              defaultValue={
+                quote ? (quote.page_number ?? undefined) : undefined
+              }
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               placeholder="Page number"
             />

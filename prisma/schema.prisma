@@ -23,6 +23,7 @@ model users {
 
 model books {
   id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
   title        String
   author       String
   image_url    String
@@ -34,6 +35,7 @@ model books {
 
 model quotes {
   id          Int     @id @default(autoincrement())
+  createdAt   DateTime @default(now())
   title       String?
   quote       String  @db.Text
   page_number Int?
