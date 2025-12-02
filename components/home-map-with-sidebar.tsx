@@ -261,7 +261,7 @@ export default function HomeMapWithSidebar({
             {quotesWithLocation.map((quote) => {
               const image_url = quote.books.image_url
               const icon = L.icon({
-                iconUrl: image_url,
+                iconUrl: image_url ?? 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
                 iconRetinaUrl:
                   'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
                 shadowUrl:
