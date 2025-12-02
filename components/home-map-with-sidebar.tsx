@@ -1,15 +1,14 @@
 'use client'
 
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  useMapEvents,
-} from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
+import MarkerClusterGroup from 'react-leaflet-cluster'
 import 'leaflet/dist/leaflet.css'
+import 'react-leaflet-cluster/dist/assets/MarkerCluster.css'
+import 'react-leaflet-cluster/dist/assets/MarkerCluster.Default.css'
 import L from 'leaflet'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 // Fix for default marker icons in react-leaflet
 const icon = L.icon({
@@ -37,8 +36,17 @@ type Quote = {
   }
 }
 
+type Book = {
+  id: number
+  title: string
+  author: string
+  image_url: string | null
+  publish_date: Date | null
+}
+
 type HomeMapWithSidebarProps = {
   quotes: Quote[]
+  books: Book[]
 }
 
 function MapBoundsUpdater({
@@ -64,6 +72,7 @@ function MapBoundsUpdater({
 
 export default function HomeMapWithSidebar({
   quotes,
+  books,
 }: HomeMapWithSidebarProps) {
   const [selectedQuote, setSelectedQuote] = useState<Quote | null>(null)
   const [mapBounds, setMapBounds] = useState<L.LatLngBounds | null>(null)
@@ -78,6 +87,10 @@ export default function HomeMapWithSidebar({
         mapBounds.contains([quote.latitude!, quote.longitude!])
       )
     : quotesWithLocation
+
+  // Filter books to show only those with visible quotes
+  const visibleBookIds = new Set(visibleQuotes.map((q) => q.books.id))
+  const visibleBooks = books.filter((book) => visibleBookIds.has(book.id))
 
   useEffect(() => {
     L.Icon.Default.mergeOptions({
@@ -115,11 +128,7 @@ export default function HomeMapWithSidebar({
       {/* Sidebar */}
       <div className="w-96 bg-white shadow-lg overflow-y-auto border-r border-gray-200">
         <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900">Literary Map</h2>
-          <p className="text-sm text-gray-600 mt-1">
-            Showing {visibleQuotes.length} of {quotesWithLocation.length} quote
-            {quotesWithLocation.length !== 1 ? 's' : ''}
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900">Philly Lit Map</h1>
         </div>
 
         {selectedQuote ? (
@@ -133,9 +142,9 @@ export default function HomeMapWithSidebar({
 
             <div className="space-y-4">
               {selectedQuote.title && (
-                <h3 className="text-xl font-bold text-gray-900">
+                <h2 className="text-xl font-bold text-gray-900">
                   {selectedQuote.title}
-                </h3>
+                </h2>
               )}
 
               <blockquote className="text-gray-700 italic border-l-4 border-gray-900 pl-4 py-2">
@@ -175,10 +184,56 @@ export default function HomeMapWithSidebar({
               Click on a marker on the map to view the quote details.
             </p>
 
+            {/* Books Section */}
+            {visibleBooks.length > 0 && (
+              <div className="mt-6 space-y-3">
+                <h2 className="font-semibold text-gray-900">
+                  {mapBounds ? 'Books in View' : 'All Books'}
+                </h2>
+                <p className="text-sm text-gray-600 mt-1">
+                  Showing {visibleBooks.length} of {books.length} books
+                  {visibleBooks.length !== 1 ? 's' : ''}
+                </p>
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  {visibleBooks.map((book) => (
+                    <Link
+                      key={book.id}
+                      href={`/books/${book.id}`}
+                      className="flex gap-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
+                    >
+                      {book.image_url && (
+                        <Image
+                          src={book.image_url}
+                          alt={book.title}
+                          className="w-12 h-16 object-cover rounded"
+                          width="48"
+                          height="64"
+                        />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 line-clamp-1">
+                          {book.title}
+                        </p>
+                        <p className="text-xs text-gray-600 mt-1">
+                          {book.author}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Quotes Section */}
             <div className="mt-6 space-y-3">
-              <h3 className="font-semibold text-gray-900">
+              <h2 className="font-semibold text-gray-900">
                 {mapBounds ? 'Quotes in View' : 'All Quotes'}
-              </h3>
+              </h2>
+              <p className="text-sm text-gray-600 mt-1">
+                Showing {visibleQuotes.length} of {quotesWithLocation.length}{' '}
+                quote
+                {quotesWithLocation.length !== 1 ? 's' : ''}
+              </p>
               {visibleQuotes.length > 0 ? (
                 <div className="space-y-2 max-h-96 overflow-y-auto">
                   {visibleQuotes.map((quote) => (
@@ -218,16 +273,18 @@ export default function HomeMapWithSidebar({
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MapBoundsUpdater onBoundsChange={setMapBounds} />
-          {quotesWithLocation.map((quote) => (
-            <Marker
-              key={quote.id}
-              position={[quote.latitude!, quote.longitude!]}
-              icon={icon}
-              eventHandlers={{
-                click: () => setSelectedQuote(quote),
-              }}
-            />
-          ))}
+          <MarkerClusterGroup>
+            {quotesWithLocation.map((quote) => (
+              <Marker
+                key={quote.id}
+                position={[quote.latitude!, quote.longitude!]}
+                icon={icon}
+                eventHandlers={{
+                  click: () => setSelectedQuote(quote),
+                }}
+              />
+            ))}
+          </MarkerClusterGroup>
         </MapContainer>
       </div>
     </div>

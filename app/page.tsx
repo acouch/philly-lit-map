@@ -13,9 +13,15 @@ export default async function Home() {
     },
   })
 
+  const books = await prisma.books.findMany({
+    orderBy: {
+      title: 'asc',
+    },
+  })
+
   return (
     <main className="w-full h-screen">
-      <HomeMapWithSidebar quotes={quotes} />
+      <HomeMapWithSidebar quotes={quotes} books={books} />
     </main>
   )
 }
