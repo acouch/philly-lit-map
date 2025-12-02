@@ -10,17 +10,13 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// Fix for default marker icons in react-leaflet
-const icon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl:
-    'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-})
+type Book = {
+  id: number
+  title: string
+  author: string
+  image_url: string | null
+  publish_date: Date | null
+}
 
 type Quote = {
   id: number
@@ -29,19 +25,7 @@ type Quote = {
   page_number: number
   latitude: number | null
   longitude: number | null
-  books: {
-    id: number
-    title: string
-    author: string
-  }
-}
-
-type Book = {
-  id: number
-  title: string
-  author: string
-  image_url: string | null
-  publish_date: Date | null
+  books: Book
 }
 
 type HomeMapWithSidebarProps = {
@@ -274,16 +258,30 @@ export default function HomeMapWithSidebar({
           />
           <MapBoundsUpdater onBoundsChange={setMapBounds} />
           <MarkerClusterGroup>
-            {quotesWithLocation.map((quote) => (
-              <Marker
-                key={quote.id}
-                position={[quote.latitude!, quote.longitude!]}
-                icon={icon}
-                eventHandlers={{
-                  click: () => setSelectedQuote(quote),
-                }}
-              />
-            ))}
+            {quotesWithLocation.map((quote) => {
+              const image_url = quote.books.image_url
+              const icon = L.icon({
+                iconUrl: image_url,
+                iconRetinaUrl:
+                  'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+                shadowUrl:
+                  'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41],
+              })
+              return (
+                <Marker
+                  key={quote.id}
+                  position={[quote.latitude!, quote.longitude!]}
+                  icon={icon}
+                  eventHandlers={{
+                    click: () => setSelectedQuote(quote),
+                  }}
+                />
+              )
+            })}
           </MarkerClusterGroup>
         </MapContainer>
       </div>
