@@ -67,13 +67,6 @@ export default async function BookPage({ params }: { params: { id: string } }) {
                   })}
                 </span>
               </div>
-
-              <div className="flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-700">
-                  Book ID:
-                </span>
-                <span className="text-sm text-gray-600">{book.id}</span>
-              </div>
             </div>
           </div>
         </div>
