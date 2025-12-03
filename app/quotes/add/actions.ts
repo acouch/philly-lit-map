@@ -19,7 +19,7 @@ export async function addQuote(formData: FormData) {
         quote,
         pageNumber: parseInt(pageNumber),
         bookId: parseInt(bookId),
-        userId: 1,
+        userId: "1",
         latitude: latitude ? parseFloat(latitude) : null,
         longitude: longitude ? parseFloat(longitude) : null,
       },
