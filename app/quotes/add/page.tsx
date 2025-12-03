@@ -7,7 +7,7 @@ export default async function AddQuotePage({
 }: {
   searchParams: { bookId?: string }
 }) {
-  const books = await prisma.books.findMany({
+  const books = await prisma.book.findMany({
     orderBy: {
       title: 'asc',
     },
