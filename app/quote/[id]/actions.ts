@@ -40,7 +40,7 @@ export async function deleteQuote(formData: FormData) {
   const id = formData.get('id') as string
 
   try {
-    await prisma.quotes.delete({
+    await prisma.quote.delete({
       where: { id: parseInt(id) },
     })
   } catch (error) {
