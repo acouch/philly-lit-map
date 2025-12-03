@@ -11,7 +11,7 @@ export default async function QuotePage({
 }: {
   params: { id: string }
 }) {
-  const quote = await prisma.quotes.findUnique({
+  const quote = await prisma.quote.findUnique({
     where: {
       id: parseInt(params.id),
     },
