@@ -13,7 +13,7 @@ export async function addQuote(formData: FormData) {
   const longitude = formData.get('longitude') as string
   const redirect_to_book = formData.get('redirect_to_book') as string
   try {
-    await prisma.quotes.create({
+    await prisma.quote.create({
       data: {
         title: title || null,
         quote,
