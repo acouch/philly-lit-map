@@ -8,7 +8,7 @@ export default async function EditBookPage({
 }: {
   params: { id: string }
 }) {
-  const book = await prisma.books.findUnique({
+  const book = await prisma.book.findUnique({
     where: {
       id: parseInt(params.id),
     },

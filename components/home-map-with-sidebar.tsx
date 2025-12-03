@@ -14,15 +14,15 @@ type Book = {
   id: number
   title: string
   author: string
-  image_url: string | null
-  publish_date: Date | null
+  imageUrl: string | null
+  publishDate: Date | null
 }
 
 type Quote = {
   id: number
   title: string | null
   quote: string
-  page_number: number | null
+  pageNumber: number | null
   latitude: number | null
   longitude: number | null
   books: Book
@@ -136,7 +136,7 @@ export default function HomeMapWithSidebar({
               </blockquote>
 
               <div className="text-sm text-gray-600 space-y-2">
-                <p>Page {selectedQuote.page_number}</p>
+                <p>Page {selectedQuote.pageNumber}</p>
 
                 <div className="border-t border-gray-200 pt-4">
                   <p className="font-medium text-gray-900 mb-1">From:</p>
@@ -185,9 +185,9 @@ export default function HomeMapWithSidebar({
                       href={`/books/${book.id}`}
                       className="flex gap-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
                     >
-                      {book.image_url && (
+                      {book.imageUrl && (
                         <Image
-                          src={book.image_url}
+                          src={book.imageUrl}
                           alt={book.title}
                           className="w-12 h-16 object-cover rounded"
                           width="48"
@@ -259,10 +259,10 @@ export default function HomeMapWithSidebar({
           <MapBoundsUpdater onBoundsChange={setMapBounds} />
           <MarkerClusterGroup>
             {quotesWithLocation.map((quote) => {
-              const image_url = quote.books.image_url
+              const imageUrl = quote.books.imageUrl
               const icon = L.icon({
                 iconUrl:
-                  image_url ??
+                  imageUrl ??
                   'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
                 iconRetinaUrl:
                   'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',

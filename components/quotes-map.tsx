@@ -21,7 +21,7 @@ type Quote = {
   id: number
   title: string | null
   quote: string
-  page_number: number | null
+  pageNumber: number | null
   latitude: number | null
   longitude: number | null
 }
@@ -85,7 +85,7 @@ export default function QuotesMap({ quotes }: QuotesMapProps) {
                     &quot;{quote.quote}&quot;
                   </p>
                   <p className="text-xs text-gray-600">
-                    Page {quote.page_number}
+                    Page {quote.pageNumber}
                   </p>
                 </div>
               </Popup>

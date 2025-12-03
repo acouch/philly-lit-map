@@ -8,7 +8,7 @@ import DeleteBookButton from '@/components/delete-book-button'
 export const dynamic = 'force-dynamic'
 
 export default async function BookPage({ params }: { params: { id: string } }) {
-  const book = await prisma.books.findUnique({
+  const book = await prisma.book.findUnique({
     where: {
       id: parseInt(params.id),
     },
@@ -38,7 +38,7 @@ export default async function BookPage({ params }: { params: { id: string } }) {
         <div className="flex flex-col md:flex-row gap-8 mt-6">
           <div className="flex-shrink-0">
             <Image
-              src={book.image_url}
+              src={book.imageUrl}
               alt={book.title}
               width={240}
               height={360}
@@ -60,7 +60,7 @@ export default async function BookPage({ params }: { params: { id: string } }) {
                   Published:
                 </span>
                 <span className="text-sm text-gray-600">
-                  {new Date(book.publish_date).toLocaleDateString('en-US', {
+                  {new Date(book.publishDate).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -89,7 +89,7 @@ export default async function BookPage({ params }: { params: { id: string } }) {
               Quotes from this book
             </h2>
             <Link
-              href={`/quotes/add?book_id=${book.id}`}
+              href={`/quotes/add?bookId=${book.id}`}
               className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors font-medium text-sm"
             >
               Add Quote

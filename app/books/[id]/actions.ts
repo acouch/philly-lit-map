@@ -8,17 +8,17 @@ export async function updateBook(formData: FormData) {
   const id = formData.get('id') as string
   const title = formData.get('title') as string
   const author = formData.get('author') as string
-  const image_url = formData.get('image_url') as string
-  const publish_date = formData.get('publish_date') as string
+  const imageUrl = formData.get('imageUrl') as string
+  const publishDate = formData.get('publishDate') as string
 
   try {
-    await prisma.books.update({
+    await prisma.book.update({
       where: { id: parseInt(id) },
       data: {
         title,
         author,
-        image_url,
-        publish_date: new Date(publish_date),
+        imageUrl,
+        publishDate: new Date(publishDate),
       },
     })
   } catch (error) {
@@ -35,7 +35,7 @@ export async function deleteBook(formData: FormData) {
   const id = formData.get('id') as string
 
   try {
-    await prisma.books.delete({
+    await prisma.book.delete({
       where: { id: parseInt(id) },
     })
   } catch (error) {

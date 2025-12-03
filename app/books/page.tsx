@@ -5,9 +5,9 @@ export const dynamic = 'force-dynamic'
 
 export default async function BooksPage() {
   const startTime = Date.now()
-  const books = await prisma.books.findMany({
+  const books = await prisma.book.findMany({
     orderBy: {
-      publish_date: 'desc',
+      publishDate: 'desc',
     },
   })
   const duration = Date.now() - startTime

@@ -5,7 +5,7 @@ import QuoteFormWrapper from './quote-form-wrapper'
 export default async function AddQuotePage({
   searchParams,
 }: {
-  searchParams: { book_id?: string }
+  searchParams: { bookId?: string }
 }) {
   const books = await prisma.books.findMany({
     orderBy: {
@@ -13,7 +13,7 @@ export default async function AddQuotePage({
     },
   })
 
-  const preselectedBookId = searchParams.book_id
+  const preselectedBookId = searchParams.bookId
 
   return (
     <QuoteFormWrapper

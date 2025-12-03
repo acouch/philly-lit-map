@@ -1,11 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'images.ctfassets.net',
-      'philly-lit-map.vercel.app',
-      'm.media-amazon.com',
-    ],
+    domains: ['philly-lit-map.vercel.app'],
   },
   experimental: {
     serverActions: true,

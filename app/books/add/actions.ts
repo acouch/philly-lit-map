@@ -7,16 +7,16 @@ import { redirect } from 'next/navigation'
 export async function addBook(formData: FormData) {
   const title = formData.get('title') as string
   const author = formData.get('author') as string
-  const image_url = formData.get('image_url') as string
-  const publish_date = formData.get('publish_date') as string
+  const imageUrl = formData.get('imageUrl') as string
+  const publishDate = formData.get('publishDate') as string
 
-  await prisma.books.create({
+  await prisma.book.create({
     data: {
       title,
       author,
-      image_url,
-      publish_date: new Date(publish_date),
-      user_id: 1,
+      imageUrl,
+      publishDate: new Date(publishDate),
+      userId: 1,
     },
   })
 

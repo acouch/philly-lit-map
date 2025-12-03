@@ -47,7 +47,7 @@ export default async function QuotePage({
           <div className="space-y-3 text-sm">
             <div className="flex items-center space-x-2">
               <span className="font-medium text-gray-700">Page:</span>
-              <span className="text-gray-600">{quote.page_number}</span>
+              <span className="text-gray-600">{quote.pageNumber}</span>
             </div>
           </div>
 
@@ -70,7 +70,7 @@ export default async function QuotePage({
               className="flex space-x-4 p-4 bg-white/70 rounded-lg ring-1 ring-gray-900/5 hover:bg-white transition-colors"
             >
               <Image
-                src={quote.books.image_url}
+                src={quote.books.imageUrl}
                 alt={quote.books.title}
                 width={80}
                 height={120}
@@ -83,7 +83,7 @@ export default async function QuotePage({
                 <p className="text-sm text-gray-600">by {quote.books.author}</p>
                 <p className="text-xs text-gray-500">
                   Published:{' '}
-                  {new Date(quote.books.publish_date).toLocaleDateString()}
+                  {new Date(quote.books.publishDate).toLocaleDateString()}
                 </p>
               </div>
             </Link>

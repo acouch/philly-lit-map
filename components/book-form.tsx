@@ -6,8 +6,8 @@ type BookFormProps = {
     id: number
     title: string
     author: string
-    image_url: string
-    publish_date: Date
+    imageUrl: string
+    publishDate: Date
   }
   submitButtonText: string
   cancelHref: string
@@ -24,7 +24,7 @@ export default function BookForm({
   description,
 }: BookFormProps) {
   const formattedDate = book
-    ? new Date(book.publish_date).toISOString().split('T')[0]
+    ? new Date(book.publishDate).toISOString().split('T')[0]
     : ''
 
   return (
@@ -76,17 +76,17 @@ export default function BookForm({
 
           <div>
             <label
-              htmlFor="image_url"
+              htmlFor="imageUrl"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Image URL
             </label>
             <input
               type="url"
-              id="image_url"
-              name="image_url"
+              id="imageUrl"
+              name="imageUrl"
               required
-              defaultValue={book?.image_url}
+              defaultValue={book?.imageUrl}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               placeholder="https://example.com/book-cover.jpg"
             />
@@ -94,15 +94,15 @@ export default function BookForm({
 
           <div>
             <label
-              htmlFor="publish_date"
+              htmlFor="publishDate"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Publish Date
             </label>
             <input
               type="date"
-              id="publish_date"
-              name="publish_date"
+              id="publishDate"
+              name="publishDate"
               required
               defaultValue={formattedDate}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"

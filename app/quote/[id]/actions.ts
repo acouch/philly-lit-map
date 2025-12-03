@@ -8,19 +8,19 @@ export async function updateQuote(formData: FormData) {
   const id = formData.get('id') as string
   const title = formData.get('title') as string
   const quote = formData.get('quote') as string
-  const page_number = formData.get('page_number') as string
-  const book_id = formData.get('book_id') as string
+  const pageNumber = formData.get('pageNumber') as string
+  const bookId = formData.get('bookId') as string
   const latitude = formData.get('latitude') as string
   const longitude = formData.get('longitude') as string
 
   try {
-    await prisma.quotes.update({
+    await prisma.quote.update({
       where: { id: parseInt(id) },
       data: {
         title: title || null,
         quote,
-        page_number: parseInt(page_number),
-        book_id: parseInt(book_id),
+        pageNumber: parseInt(pageNumber),
+        bookId: parseInt(bookId),
         latitude: latitude ? parseFloat(latitude) : null,
         longitude: longitude ? parseFloat(longitude) : null,
       },
@@ -32,7 +32,7 @@ export async function updateQuote(formData: FormData) {
 
   revalidatePath(`/quote/${id}`)
   revalidatePath('/quotes')
-  revalidatePath(`/books/${book_id}`)
+  revalidatePath(`/books/${bookId}`)
   redirect(`/quote/${id}`)
 }
 

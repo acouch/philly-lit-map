@@ -7,42 +7,103 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL_PRISMA") // uses connection pooling
-  directUrl = env("POSTGRES_URL") // uses a direct connection
+  url       = env("DATABASE_URL_PRISMA")
+  // uses connection pooling
+  directUrl = env("POSTGRES_URL")
+  // uses a direct connection
 }
 
-model users {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  image     String
-  createdAt DateTime @default(now())
-  books     books[]
-  quotes    quotes[]
-}
-
-model books {
+model Book {
   id           Int      @id @default(autoincrement())
   createdAt    DateTime @default(now())
   title        String
   author       String
-  image_url    String
-  publish_date DateTime
-  user_id      Int
-  user         users   @relation(fields: [user_id], references: [id])
-  quotes       quotes[]
+  imageUrl     String
+  publishDate  DateTime
+  userId       String
+  user         User    @relation(fields: [userId], references: [id])
+  quotes       Quote[]
+
+  @@map("books")
 }
 
-model quotes {
-  id          Int     @id @default(autoincrement())
+model Quote {
+  id          Int      @id @default(autoincrement())
   createdAt   DateTime @default(now())
   title       String?
-  quote       String  @db.Text
-  page_number Int?
+  quote       String   @db.Text
+  pageNumber  Int?
   latitude    Float?
   longitude   Float?
-  books       books   @relation(fields: [book_id], references: [id])
-  book_id     Int
-  user_id     Int
-  user        users   @relation(fields: [user_id], references: [id])
+  books       Book    @relation(fields: [bookId], references: [id])
+  bookId      Int
+  userId      String
+  user        User    @relation(fields: [userId], references: [id])
+
+  @@map("quotes")
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+  books         Book[]
+  quotes        Quote[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }

@@ -31,8 +31,8 @@ export default function QuoteFormWrapper({
         id: 0,
         title: null,
         quote: '',
-        page_number: 1,
-        book_id: parseInt(preselectedBookId),
+        pageNumber: 1,
+        bookId: parseInt(preselectedBookId),
         latitude: null,
         longitude: null,
       }

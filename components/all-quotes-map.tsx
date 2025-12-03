@@ -22,7 +22,7 @@ type Quote = {
   id: number
   title: string | null
   quote: string
-  page_number: number
+  pageNumber: number
   latitude: number | null
   longitude: number | null
   books: {
@@ -97,7 +97,7 @@ export default function AllQuotesMap({ quotes }: AllQuotesMapProps) {
                     &quot;{quote.quote}&quot;
                   </p>
                   <p className="text-xs text-gray-600 mb-1">
-                    Page {quote.page_number}
+                    Page {quote.pageNumber}
                   </p>
                   <Link
                     href={`/books/${quote.books.id}`}

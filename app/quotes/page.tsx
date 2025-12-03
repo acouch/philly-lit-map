@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function QuotesPage() {
   const startTime = Date.now()
-  const quotes = await prisma.quotes.findMany({
+  const quotes = await prisma.quote.findMany({
     include: {
       books: true,
       user: true,
@@ -53,7 +53,7 @@ export default async function QuotesPage() {
                     <span className="font-medium">{quote.books.title}</span> by{' '}
                     {quote.books.author}
                   </p>
-                  <p>Page {quote.page_number}</p>
+                  <p>Page {quote.pageNumber}</p>
                 </div>
               </Link>
             </li>

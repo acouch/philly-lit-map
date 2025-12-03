@@ -5,8 +5,8 @@ type Book = {
   id: number
   title: string
   author: string
-  image_url: string
-  publish_date: Date
+  imageUrl: string
+  publishDate: Date
 }
 
 type BooksListProps = {
@@ -40,7 +40,7 @@ export default function BooksList({ books, duration }: BooksListProps) {
               className="flex space-x-4 p-4 bg-white/50 rounded-lg ring-1 ring-gray-900/5 hover:bg-white/70 transition-colors"
             >
               <Image
-                src={book.image_url}
+                src={book.imageUrl}
                 alt={book.title}
                 width={80}
                 height={120}
@@ -52,7 +52,7 @@ export default function BooksList({ books, duration }: BooksListProps) {
                 </h2>
                 <p className="text-sm text-gray-600">by {book.author}</p>
                 <p className="text-xs text-gray-500">
-                  Published: {new Date(book.publish_date).toLocaleDateString()}
+                  Published: {new Date(book.publishDate).toLocaleDateString()}
                 </p>
               </div>
             </Link>

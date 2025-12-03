@@ -4,7 +4,7 @@ import HomeMapWithSidebar from '@/components/home-map-with-sidebar'
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const quotes = await prisma.quotes.findMany({
+  const quotes = await prisma.quote.findMany({
     include: {
       books: true,
     },
@@ -13,7 +13,7 @@ export default async function Home() {
     },
   })
 
-  const books = await prisma.books.findMany({
+  const books = await prisma.book.findMany({
     orderBy: {
       title: 'asc',
     },

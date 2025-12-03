@@ -8,13 +8,13 @@ export default async function EditQuotePage({
 }: {
   params: { id: string }
 }) {
-  const quote = await prisma.quotes.findUnique({
+  const quote = await prisma.quote.findUnique({
     where: {
       id: parseInt(params.id),
     },
   })
 
-  const books = await prisma.books.findMany({
+  const books = await prisma.book.findMany({
     orderBy: {
       title: 'asc',
     },

@@ -12,8 +12,8 @@ type QuoteFormProps = {
     id: number
     title: string | null
     quote: string
-    page_number: number | null
-    book_id: number
+    pageNumber: number | null
+    bookId: number
     latitude: number | null
     longitude: number | null
   }
@@ -46,16 +46,16 @@ export default function QuoteForm({
 
           <div>
             <label
-              htmlFor="book_id"
+              htmlFor="bookId"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Book
             </label>
             <select
-              id="book_id"
-              name="book_id"
+              id="bookId"
+              name="bookId"
               required
-              defaultValue={quote?.book_id}
+              defaultValue={quote?.bookId}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
             >
               <option value="">Select a book</option>
@@ -104,20 +104,18 @@ export default function QuoteForm({
 
           <div>
             <label
-              htmlFor="page_number"
+              htmlFor="pageNumber"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
               Page Number
             </label>
             <input
               type="number"
-              id="page_number"
-              name="page_number"
+              id="pageNumber"
+              name="pageNumber"
               required
               min="1"
-              defaultValue={
-                quote ? (quote.page_number ?? undefined) : undefined
-              }
+              defaultValue={quote ? (quote.pageNumber ?? undefined) : undefined}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
               placeholder="Page number"
             />
