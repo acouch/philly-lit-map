@@ -58,7 +58,7 @@ export default function QuotesMap({ quotes }: QuotesMapProps) {
     return null
   }
   return (
-    <div className="border-t border-gray-300 pt-8 mt-8">
+    <div className="pt-8 mt-8">
       <h2 className="text-2xl font-semibold text-gray-900 mb-4">Quote Map</h2>
       <div className="h-96 rounded-lg overflow-hidden ring-1 ring-gray-900/5">
         <MapContainer

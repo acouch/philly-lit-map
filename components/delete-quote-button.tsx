@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteQuote } from '@/app/quote/[id]/actions'
+import { deleteQuote } from '@/app/(pages)/quote/[id]/actions'
 import { useState } from 'react'
 
 export default function DeleteQuoteButton({ quoteId }: { quoteId: number }) {

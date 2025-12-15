@@ -110,7 +110,7 @@ export default function HomeMapWithSidebar({
   return (
     <div className="flex h-screen w-full">
       {/* Sidebar */}
-      <div className="w-96 bg-white shadow-lg overflow-y-auto border-r border-gray-200">
+      <div className="w-1/3 bg-white shadow-lg overflow-y-auto border-r border-gray-200">
         <div className="p-6 border-b border-gray-200">
           <h1 className="text-2xl font-bold text-gray-900">Philly Lit Map</h1>
         </div>
