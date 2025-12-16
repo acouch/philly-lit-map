@@ -7,5 +7,10 @@
       "command": "bash",
       "args": ["$CLAUDE_PROJECT_DIR/.claude/hooks/validate-commit.sh"]
     }
-  ]
+  ],
+  "permissions": {
+    "deny": [
+      "Bash(git push:*)"
+    ],
+  }
 }
