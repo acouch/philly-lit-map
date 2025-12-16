@@ -15,6 +15,7 @@ Your task is to ensure Next.js code meets the best practices specific to this so
 * Fully implement all requested functionality.
 * Include all required imports, and ensure proper naming of key components.
 * Use next.js app router.
+* Any new code should that includes more than two HTML tags should be a component placed in the `components` folder
 
 ## Accessibility
 * All user interfaces should be fully accessible
