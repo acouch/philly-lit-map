@@ -1,0 +1,11 @@
+{
+  "hooks": [
+    {
+      "events": ["PreToolUse"],
+      "matcher": "Bash(git commit:*)",
+      "type": "command",
+      "command": "bash",
+      "args": ["$CLAUDE_PROJECT_DIR/.claude/hooks/validate-commit.sh"]
+    }
+  ]
+}

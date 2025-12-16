@@ -1,5 +1,8 @@
 {
   "typescript.tsdk": "node_modules/.pnpm/typescript@5.0.4/node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prisma.pinToPrisma6": true
+  "prisma.pinToPrisma6": true,
+  "chat.promptFilesLocations": {
+    "prompts": true
+  }
 }
