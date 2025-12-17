@@ -9,8 +9,6 @@
     }
   ],
   "permissions": {
-    "deny": [
-      "Bash(git push:*)"
-    ],
+    "deny": ["Bash(git push:*)"]
   }
 }

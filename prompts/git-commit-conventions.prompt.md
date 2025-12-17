@@ -9,9 +9,8 @@ Your task is to help the user to generate a conventional commit message and comm
 
 - DO NOT add any ads such as "Generated with [Claude Code](https://claude.ai/code)"
 - Only generate the message for staged files/changes
-- Don't add any files using `git add`. The user will decide what to add. 
+- Don't add any files using `git add`. The user will decide what to add.
 - Follow the rules below for the commit message.
-
 
 ## Format
 
@@ -41,16 +40,16 @@ feat(auth): add JWT login flow
 
 ## Rules
 
-* title is lowercase, no period at the end.
-* Title should be a clear summary, max 50 characters.
-* Use the body (optional) to explain *why*, not just *what*.
-* Bullet points should be concise and high-level.
+- title is lowercase, no period at the end.
+- Title should be a clear summary, max 50 characters.
+- Use the body (optional) to explain _why_, not just _what_.
+- Bullet points should be concise and high-level.
 
 Avoid
 
-* Vague titles like: "update", "fix stuff"
-* Overly long or unfocused titles
-* Excessive detail in bullet points
+- Vague titles like: "update", "fix stuff"
+- Overly long or unfocused titles
+- Excessive detail in bullet points
 
 ## Allowed Types
 
@@ -64,4 +63,3 @@ Avoid
 | test     | Adding or refactoring tests           |
 | style    | Code formatting (no logic change)     |
 | perf     | Performance improvements              |
-

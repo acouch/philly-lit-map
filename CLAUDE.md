@@ -9,12 +9,14 @@ Philly Lit Map is a Next.js application that displays literary quotes from books
 ## Development Commands
 
 **Development:**
+
 ```bash
 pnpm dev          # Start dev server (runs prisma generate first)
 pnpm build        # Build for production (generates Prisma client and pushes DB schema)
 ```
 
 **Code Quality:**
+
 ```bash
 pnpm lint         # Run ESLint
 pnpm lint:fix     # Auto-fix ESLint issues
@@ -23,6 +25,7 @@ pnpm format:check # Check formatting without writing
 ```
 
 **Database:**
+
 ```bash
 npx prisma generate           # Generate Prisma client
 npx prisma db push           # Push schema changes to database
@@ -35,12 +38,14 @@ npx prisma studio            # Open Prisma Studio GUI
 ### Database & ORM
 
 **Prisma with PostgreSQL**
+
 - Schema: `prisma/schema.prisma`
 - Database URLs: `DATABASE_URL_PRISMA` (connection pooling) and `POSTGRES_URL` (direct connection)
 - Singleton pattern in `lib/prisma.ts` prevents multiple instances in development
 - Key models: `Book`, `Quote`, `User`, `Session`, `Account`, `Verification`
 
 **Data Relationships:**
+
 - Books have many Quotes (one-to-many)
 - Users own Books and Quotes (one-to-many)
 - Quotes are tied to Books via `bookId` foreign key
@@ -49,6 +54,7 @@ npx prisma studio            # Open Prisma Studio GUI
 ### Authentication
 
 **Better Auth** (not NextAuth)
+
 - Server config: `lib/auth.ts` - uses Prisma adapter with email/password auth
 - Client config: `lib/auth-client.ts`
 - API route: `app/api/auth/[...all]/route.ts`
@@ -57,18 +63,21 @@ npx prisma studio            # Open Prisma Studio GUI
 ### App Structure
 
 **Next.js 13 App Router:**
+
 - Public routes: `/` (map), `/books`, `/quotes`, `/about`
 - Protected routes: `/dashboard`, `/quotes/add`, `/books/add`, edit pages
 - Route groups: `(pages)` for pages with special layout
 - Server Components by default; client components marked with `'use client'`
 
 **Server Actions:**
+
 - Pattern: `actions.ts` files colocated with pages
 - Handle form submissions and data mutations
 - Call `revalidatePath()` after mutations
 - Redirect after successful operations
 
 **Key Components:**
+
 - `home-map-with-sidebar.tsx`: Main map view with Leaflet, shows quotes with locations
 - Map uses react-leaflet with clustering (MarkerClusterGroup)
 - Sidebar filters books/quotes based on visible map bounds
@@ -95,4 +104,5 @@ npx prisma studio            # Open Prisma Studio GUI
 - **Better Auth MCP**: Better Auth documentation is available via MCP server for questions about authentication
 
 @prompts/nextjs-best-practice.prompt.md
+
 @prompts/git-commit-conventions.prompt.md
